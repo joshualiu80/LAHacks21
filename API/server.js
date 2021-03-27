@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const path = require('path');
+const createError = require('http-errors')
 
 const app = express();
 
@@ -27,7 +29,7 @@ const userRouter = require('./routes/users');
 const tagRouter = require('./routes/tags');
 const snippetRouter = require('./routes/snippets');
 const authRouter = require('./routes/auth');
-var uploadRouter = require('./routes/upload');
+const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,16 +37,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(fileUpload());
 
+app.use('/users', userRouter);
+app.use('/tags', tagRouter);
+app.use('/snippets', snippetRouter);
+app.use('/auth', authRouter);
+app.use('/upload', uploadRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
-app.use('/users', userRouter);
-app.use('/tags', tagsRouter);
-app.use('/snippets', snippetsRouter);
-app.use('/auth', authRouter);
-app.use('/upload', uploadRouter);
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -54,7 +56,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message);
 });
 
 app.listen(port, () => {
