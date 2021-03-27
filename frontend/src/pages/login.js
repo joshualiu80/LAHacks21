@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import SignUp from '../components/SignUp'
+import Friend from '../components/Friend'
 
 const Login = () => {
     const [firstname, setFirstname] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
                 <input className="password" type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit">Login</button>
             </form>
-            <SignUp />
+            <Friend />
         </div>
     );
 }
