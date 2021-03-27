@@ -11,7 +11,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') || false);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     const displayPopUp = () => {
         setShowPopUp(true);
@@ -25,14 +25,14 @@ const Login = () => {
         localStorage.setItem('loggedIn', loggedIn);
     })
     useEffect(() => {
-        if (loggedIn == 'true') {
+        if (loggedIn) {
             history.push('/friends');
         }
     }, [loggedIn])
 
     const submitLogin = async (e) => {
         e.preventDefault();
-        const res = await axios.get("http://localhost:3000/auth/verify", { username: username, password: password });
+        const res = await axios.post("http://localhost:3000/auth/verify",  { username: username, password: password });
         if (res.status === 200) {
             setLoggedIn(true);
             localStorage.setItem('loggedIn', true);
