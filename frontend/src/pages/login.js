@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import SignUp from '../components/SignUp';
 import axios from 'axios';
+import './login.css';
 
 const Login = () => {
+    let history = useHistory();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
@@ -19,8 +23,14 @@ const Login = () => {
     useEffect(() => {
         localStorage.setItem('loggedIn', loggedIn);
     })
+    useEffect(() => {
+        if (loggedIn == 'true') {
+            history.push('/friends');
+        }
+    }, [loggedIn])
 
     const submitLogin = async (e) => {
+        e.preventDefault();
         const res = await axios.get("http://localhost:3000/auth/verify", { username: username, password: password });
         if (res.status === 200) {
             setLoggedIn(true);
@@ -29,21 +39,26 @@ const Login = () => {
             console.log(res);
             // display error message?
         }
-        e.preventDefault();
     };
 
     return (
         <div className="Login">
-            <img src="/" alt={"Logo Goes Here"}/>
+            <div className="logo-header">
+                <img src="/images/logo.png" alt="LunaTalks Logo"/>
+                <h1>LunaTalks</h1>
+            </div>
             <form className="loginForm" onSubmit={submitLogin}>
-                <input className="username" type="text" placeholder="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <input className="password" type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button type="submit">Login</button>
-                <p>Don't have an account? <span onClick={displayPopUp}>Sign up</span> </p>
+                <input className="username" type="text" placeholder="username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input className="password" type="password" placeholder="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button type="submit" className="login-btn">
+                    <p>LOGIN</p>
+                    <img src="/images/comet.png"/>
+                </button>
+                <p className="signup-link">Don't have an account? <b><span onClick={displayPopUp}>Sign up</span></b></p>
             </form>
             {showPopUp ? <SignUp onClose={hidePopUp} /> : null}
-            {loggedIn ? <div>Logged In</div> : <div>not logged in</div> } 
-            {/* this should redirect to either feed or friends list */}
+            <img src="/images/sun.png" className="bg-img" id="sun" />
+            <img src="/images/earth.png" className="bg-img" id="earth" />
         </div>
     );
 }
