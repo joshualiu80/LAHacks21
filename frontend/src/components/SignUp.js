@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './SignUp.css'
 
-const SignUp = () => {
+const SignUp = ({ onClose }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
@@ -25,6 +25,7 @@ const SignUp = () => {
     <>
       <div className="overlay"/>
         <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+          <span classnName="close" onClick={onClose}>x</span>
           <div>
             <input type="text" placeholder="First Name" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
             <input type="text" placeholder="Last Name" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
