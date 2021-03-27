@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import SignUp from '../components/SignUp'
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -23,6 +24,7 @@ const Login = () => {
                 <button type="submit">Login</button>
                 <p>Don't have an account? <span onClick={signUp}>Sign up</span> </p>
             </form>
+            <SignUp />
         </div>
     );
 }
