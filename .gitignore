@@ -25,4 +25,5 @@ yarn-debug.log*
 yarn-error.log*
 
 *.swp
-*/public/files/*
+*/public/files
+*.env
