@@ -17,8 +17,10 @@ router.post('/', function(req, res){
 });
 
 
-router.get('/getUser', function(req,res){
-  
+router.get('/:id', function(req,res){
+  User.findOne({_id:req.params.id})
+  .then(user=>res.json(user))
+  .catch(err=> res.status(400).json('Error: ' + err))
 });
 
 module.exports = router;
