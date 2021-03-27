@@ -10,8 +10,8 @@ const SignUp = ({ onClose }) => {
 
   const signup = async (e) => {
     const newUser = {
-      firstName: firstname,
-      lastName: lastname,
+      fname: firstname,
+      lname: lastname,
       username: username,
       password: password
     }

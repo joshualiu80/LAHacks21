@@ -1,0 +1,103 @@
+.friend {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.friend .tabs {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+.friend .tablinks {
+  border: none;
+  outline: none;
+  font-size: 3rem;
+  border-radius: 10px 0 0 10px;
+}
+.messages {
+  background-color: #bb5098;
+}
+.schedule {
+  background-color: #f47f6b;
+}
+.settings {
+  background-color: #f5c63c;
+}
+.active-tab {
+  background-color: white;
+}
+.friend .tabcontent {
+  padding: 20px 50px;
+  background-color: white;
+  border-radius: 0 10px 10px 10px;
+  width: 400px;
+  height: 400px;
+}
+.friend-info {
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
+  margin-left: -30px;
+}
+.friend-info h1 {
+  margin: 0;
+  color: #270c70;
+}
+/* SCHEDULE CSS */
+.record-msg {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 25px;
+  margin: 0 auto;
+  margin-top: 35px;
+}
+.record-msg input[type="text"],
+.datetime {
+  background-color: #a1a1a1;
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.25rem;
+  outline: none;
+  border: none;
+}
+.record-msg input[type="text"] {
+  padding: 10px;
+}
+.datetime input,
+.datetime select,
+.react-datetime-picker__wrapper {
+  color: white;
+  outline: none;
+  border: none !important;
+}
+.datetime button {
+  outline: none;
+}
+.datetime button svg {
+  stroke: white !important;
+}
+.record-msg input[type="text"]::placeholder {
+  color: white;
+}
+.record-btn {
+  height: 75px;
+  background: linear-gradient(90deg, #7a5494 0%, #5449a4 100%);
+  border: none;
+  border-radius: 37px;
+  outline: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-left: 40px;
+  color: white;
+  font-size: 1.25rem;
+  margin-top: 25px;
+}
+.record-btn img {
+  height: 100%;
+  margin-left: auto;
+}
