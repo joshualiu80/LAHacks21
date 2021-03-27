@@ -5,6 +5,8 @@
     text-align: center;
     font-size: medium;
     font-family: Marker Felt, fantasy;
+    margin: 50px; 
+    /* temp margin idk change maybe */
 }
 
 .bubble {
@@ -21,4 +23,8 @@ img {
     margin-left: -25%;
     height: 100%;
     width: auto;
+}
+
+.name {
+    color: black;
 }
