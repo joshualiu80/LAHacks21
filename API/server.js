@@ -13,16 +13,16 @@ require('dotenv').config();
 const port = 3000;
 const uri = process.env.MONGO_URI;
 
-// mongoose.connect(uri, {
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true
-// });
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 
 const connection = mongoose.connection;
-// connection.once('open', () => {
-//   console.log("MongoDB database connection established successfully");
-// });
+connection.once('open', () => {
+  console.log("MongoDB database connection established successfully");
+});
 
 //routes
 const userRouter = require('./routes/users');
