@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SignUp from '../components/SignUp';
 import axios from 'axios';
-import Friend from '../components/Friend'
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -45,7 +44,6 @@ const Login = () => {
             {showPopUp ? <SignUp onClose={hidePopUp} /> : null}
             {loggedIn ? <div>Logged In</div> : <div>not logged in</div> } 
             {/* this should redirect to either feed or friends list */}
-            <Friend />
         </div>
     );
 }
