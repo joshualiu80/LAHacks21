@@ -9,7 +9,7 @@ const DUMMYDATA = {
   lname: 'Vu'
 }
 
-const Friend = () => {
+const Friend = ({ setShowPopUp }) => {
   const [subject, setSubject] = useState('');
   const [datetime, setDatetime] = useState(new Date());
 
@@ -46,7 +46,7 @@ const Friend = () => {
   
   return (
     <>
-      <div class="overlay" />
+      <div class="overlay" onClick={() => {setShowPopUp(false)}}/>
       <div class="friend">
         <div class="tabs">
           <button class="tablinks messages active-tab" onClick={(e) => {openTab(e, 'messages')}}>
