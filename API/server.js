@@ -29,7 +29,8 @@ const snippetRouter = require('./routes/snippets');
 const authRouter = require('./routes/auth');
 var uploadRouter = require('./routes/upload');
 
-
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 app.use(cors());
 app.use(fileUpload());
@@ -55,7 +56,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err.message);
 });
 
 app.listen(port, () => {

@@ -5,6 +5,10 @@ const ms = require('mediaserver');
 
 const AUDIO_FILE_LOCATION = `${__dirname}/../public/files`;
 
+router.get('/:id', (req, res) => {
+
+});
+
 router.get('/:fileName', (req, res, next) => {
 	let snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
 	console.log(snippetLoc)
