@@ -9,17 +9,10 @@ const SignUp = ({ onClose }) => {
   const [password, setPassword] = useState("");
 
   const signup = async (e) => {
-    const newUser = {
-      firstName: firstname,
-      lastName: lastname,
-      username: username,
-      password: password
-    }
-    console.log(newUser);
     const res = await axios.post("http://localhost:3000/users", { username: username, password: password, fname: firstname, lname: lastname } );
     console.log(res);
     e.preventDefault();
-    //onClose();
+    onClose();
     // validation? if username already exists or if name is already in db
     // make POST req with newUser
     // reset form? or display confirmation message
