@@ -1,9 +1,5 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-
-
-router.route('/').get((req,res) => {
-  res.send('sup');
-})
+const Snippet = require('../models/snippet.model');
 
 module.exports = router;
