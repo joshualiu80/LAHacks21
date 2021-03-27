@@ -16,4 +16,9 @@ router.post('/', function(req, res){
   .catch(err => res.status(400).json("Error: " + err))
 });
 
+
+router.get('/getUser', function(req,res){
+  
+});
+
 module.exports = router;

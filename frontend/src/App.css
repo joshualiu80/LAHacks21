@@ -10,6 +10,7 @@
   backdrop-filter: blur(2px) brightness(75%);
   width: 100vw;
   height: 100vh;
+  max-width: 100%;
   position: fixed;
   top: 0;
   z-index: 1;
