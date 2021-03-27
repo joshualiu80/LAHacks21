@@ -9,13 +9,13 @@ const exampleIMG = "https://images.ctfassets.net/hrltx12pl8hq/6YSoTmOYPk2VtQ7JSk
 const FriendPage = () => {
     const [showPopUp, setShowPopUp] = useState(false);
     const [friendToOpen, setFriendToOpen] = useState("");
-    const [friendsList, setFriendsList] = useState([{username: 'Mingjia', profilePic: exampleIMG}, {username: 'Josh', profilePic: exampleIMG}]); //temp for testing
+    const [friendsList, setFriendsList] = useState([{username: 'Mingjia', profilePic: exampleIMG}, {username: 'Josh', profilePic: exampleIMG}, {username: 'Ethan', profilePic: exampleIMG}, {username: 'Braedon', profilePic: exampleIMG}, {username: 'Xuan', profilePic: exampleIMG}]); //temp for testing
 
     // useEffect(() => {
     //     const res = axios.get('this is where the route goes, probably include userId from cookies');
     //     setFriendsList(res);
     // }
-    // , []);
+    // , []); 
 
     const displayFriends = useMemo(() => friendsList.map(
         (friend) => (
@@ -25,7 +25,9 @@ const FriendPage = () => {
 
     return (
         <div>
-            {displayFriends}
+            <div className='displayView'>
+                {displayFriends}
+            </div>
             {showPopUp ? <Friend user={friendToOpen} /> : null}
         </div>
     );
