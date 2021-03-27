@@ -9,8 +9,8 @@ const SignUp = () => {
 
   const signup = () => {
     const newUser = {
-      firstName: firstname,
-      lastName: lastname,
+      fname: firstname,
+      lname: lastname,
       username: username,
       password: password
     }
