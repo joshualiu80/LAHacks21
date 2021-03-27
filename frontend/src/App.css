@@ -1,7 +1,16 @@
+:root {
+  --dpurple: #5344a9;
+  --mpurple: #7a5197;
+  --lpurple: #bb5098;
+  --orange: #f47f68;
+  --yellow: #f5c63c;
+}
+
 .overlay {
   backdrop-filter: blur(2px) brightness(75%);
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
+  z-index: 1;
 }
