@@ -4,7 +4,7 @@ const CurvedName = ( {text, arc, radius} ) => {
     const characters = text.split('');
     const degree = arc / characters.length;
     return (
-        <h1>
+        <p>
           {characters.map((char, i) => (
             <span
               key={`heading-span-${i}`}
@@ -16,7 +16,7 @@ const CurvedName = ( {text, arc, radius} ) => {
               {char}
             </span>
           ))}
-        </h1>
+        </p>
       );
 }
 

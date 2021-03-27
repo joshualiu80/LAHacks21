@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FriendBubble from '../components/friendBubble';
 import Friend from '../components/Friend';
+import './friendPage.css';
 
 const FriendPage = () => {
     const [showPopUp, setShowPopUp] = useState(false);

@@ -16,7 +16,7 @@ const SignUp = ({ onClose }) => {
       password: password
     }
     console.log(newUser);
-    const res = await axios.post("http://localhost:3000/users", { username: username, password: password, fname: firstname, lname: lastname } );
+    const res = await axios.post("http://localhost:3000/users/", { username: username, password: password, fname: firstname, lname: lastname } );
     console.log(res);
     e.preventDefault();
     //onClose();

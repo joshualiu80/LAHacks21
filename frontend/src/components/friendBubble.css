@@ -1,3 +1,12 @@
+.profileCard {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    text-align: center;
+    font-size: medium;
+    font-family: Marker Felt, fantasy;
+}
+
 .bubble {
     width: 100px;
     height: 100px;
