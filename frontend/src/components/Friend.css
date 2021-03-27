@@ -28,6 +28,9 @@
 .active-tab {
   background-color: white;
 }
+.hidden {
+  display: none;
+}
 .friend .tabcontent {
   padding: 20px 50px;
   background-color: white;

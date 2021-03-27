@@ -14,11 +14,11 @@ const Friend = () => {
   const [datetime, setDatetime] = useState(new Date());
 
   useEffect(() => {
-    const content = document.getElementsByClassName('tabcontent');
-    for (let i = 0; i < content.length; i++) {
-      content[i].style.display = 'none';
-    }
-    document.getElementById('messages').style.display = 'block';
+    // const content = document.getElementsByClassName('tabcontent');
+    // for (let i = 0; i < content.length; i++) {
+    //   content[i].style.display = 'none';
+    // }
+    // document.getElementById('messages').style.display = 'block';
   }, [])
 
   const openTab = (e, tab) => {
@@ -26,14 +26,14 @@ const Friend = () => {
     const tabs = document.getElementsByClassName('tablinks');
     // make all content display none
     for (let i = 0; i < content.length; i++) {
-      content[i].style.display = 'none';
+      content[i].classList.add('hidden');
     }
     // make all tablinks not active
     for (let i = 0; i < tabs.length; i++) {
       tabs[i].classList.remove('active-tab');
     }
     // show tab/content you want
-    document.getElementById(tab).style.display = 'block';
+    document.getElementById(tab).classList.remove('hidden');
     e.currentTarget.classList.add('active-tab');
   }
 
@@ -63,7 +63,7 @@ const Friend = () => {
           {friendInfo}
           <p>wait don't we need to store a user's messages too? bc snippets are just scheduled ones right?</p>
         </div>
-        <div id="schedule" class="tabcontent">
+        <div id="schedule" class="tabcontent hidden">
           {friendInfo}
           <form class="record-msg">
             <input type="text" placeholder="Subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
@@ -81,7 +81,7 @@ const Friend = () => {
             </button>
           </form>
         </div>
-        <div id="settings" class="tabcontent">
+        <div id="settings" class="tabcontent hidden">
           {friendInfo}
           <h3>Settings</h3>
           <p>unadd friend or something here</p>
