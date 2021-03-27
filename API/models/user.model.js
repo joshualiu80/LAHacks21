@@ -8,7 +8,8 @@ const userSchema = new Schema({
   username: {type: String, required: true},
   password: {type: String, required: true},
   friends: [{type: mongoose.Schema.Types.ObjectId}],
-  snippets: [{type: mongoose.Schema.Types.ObjectId}]
+  snippetsSent: [{type: mongoose.Schema.Types.ObjectId}],
+  snippetsReceived: [{type: mongoose.Schema.Types.ObjectId}]
 });
 
 const User = mongoose.model('users', userSchema);
