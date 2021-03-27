@@ -13,16 +13,16 @@ require('dotenv').config();
 const port = 3000;
 const uri = process.env.MONGO_URI;
 
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-});
+// mongoose.connect(uri, {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true
+// });
 
 const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-});
+// connection.once('open', () => {
+//   console.log("MongoDB database connection established successfully");
+// });
 
 //routes
 const userRouter = require('./routes/users');
@@ -37,16 +37,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(fileUpload());
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
 app.use('/users', userRouter);
 app.use('/tags', tagRouter);
 app.use('/snippets', snippetRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
 
 // error handler
 app.use(function (err, req, res, next) {
