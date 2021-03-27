@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import './SignUp.css'
+import React, { useState } from 'react';
+import axios from 'axios';
+import './SignUp.css';
 
 const SignUp = ({ onClose }) => {
   const [firstname, setFirstname] = useState("");
@@ -7,7 +8,7 @@ const SignUp = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const signup = () => {
+  const signup = async (e) => {
     const newUser = {
       firstName: firstname,
       lastName: lastname,
@@ -15,6 +16,10 @@ const SignUp = ({ onClose }) => {
       password: password
     }
     console.log(newUser);
+    const res = await axios.post("http://localhost:3000/users", { username: username, password: password, fname: firstname, lname: lastname } );
+    console.log(res);
+    e.preventDefault();
+    //onClose();
     // validation? if username already exists or if name is already in db
     // make POST req with newUser
     // reset form? or display confirmation message
@@ -25,7 +30,7 @@ const SignUp = ({ onClose }) => {
     <>
       <div className="overlay"/>
         <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
-          <span classnName="close" onClick={onClose}>x</span>
+          <span className="close" onClick={onClose}>x</span>
           <div>
             <input type="text" placeholder="First Name" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
             <input type="text" placeholder="Last Name" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
