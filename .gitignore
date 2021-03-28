@@ -24,4 +24,5 @@ yarn-error.log*
 
 *.swp
 */public/files
+*/public/profiles
 *.env
