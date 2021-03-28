@@ -1,11 +1,11 @@
 import React from 'react';
 import './friendBubble.css';
 
-const FriendBubble = ({ username, profilePic, setShowPopUp, setFriendToOpen }) => {
+const FriendBubble = ({ username, userId, profilePic, setShowPopUp, setFriendToOpen }) => {
 
     const openFriend = () => {
         setShowPopUp(true);
-        setFriendToOpen(username);
+        setFriendToOpen(userId);
     };
 
     const getRandomInt = (max, min) => {

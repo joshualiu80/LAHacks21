@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import SignUp from '../components/SignUp';
 import axios from 'axios';
+import { withCookies, Cookies } from 'react-cookie';
 import './login.css';
 
 
-const Login = () => {
+const Login = (props) => {
     let history = useHistory();
 
+    const { cookies } = props;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
@@ -36,6 +38,8 @@ const Login = () => {
         if (res.status === 200) {
             setLoggedIn(true);
             localStorage.setItem('loggedIn', true);
+            console.log(res);
+            cookies.set('userId', res.data._id);
         } else {
             console.log(res);
             // display error message?
@@ -64,4 +68,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default withCookies(Login);
