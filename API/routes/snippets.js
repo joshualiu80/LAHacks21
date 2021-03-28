@@ -4,6 +4,7 @@ const Snippet = require('../models/snippet.model');
 const ms = require('mediaserver');
 const User = require('../models/user.model');
 const format = require('date-fns/format');
+const ffmpeg = require('ffmpeg');
 const config = require('../config');
 
 // Get a snippet's info from its id
@@ -92,13 +93,13 @@ router.post('/', (req, res, next) => {
 	console.log(req.body);
 	console.log(req.files.file);
 	const audioFile = req.files.file;
-	
+	// storing file
 	// res.sendFile(audioFile);
 	const fileExtension = config.FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
 	const creationDate = new Date(req.body.creationDate);
 	const scheduledDate = new Date(req.body.scheduledDate || req.body.creationDate);
 	const formattedCreateDate = format(creationDate, config.DATE_FORMAT)
-	const fileName = `${req.body.creator}_${formattedCreateDate}.mp3`;
+	const fileName = `${req.body.creator}_${formattedCreateDate}`;
 
 	const snippetInfo = {
 		_id: new mongoose.Types.ObjectId(),
@@ -153,6 +154,25 @@ router.post('/', (req, res, next) => {
 			});
 		}
 	);
+	const pathToSaveTo = `${config.AUDIO_FILE_LOCATION}/${fileName}.mp3`
+	// storing file
+	const process = new ffmpeg(`${config.AUDIO_FILE_LOCATION}/${fileName}`);
+	try {
+		process.then((audio) => {
+			audio.fnExtractSoundToMP3(pathToSaveTo, (error, file) => {
+				if (!error) {
+					console.log('Audio file: ' + file);
+				}
+			})
+		}, (err) => {
+			console.log('Error:' + err)
+		});
+	}
+	catch (e) {
+		console.log(e.code);
+		console.log(e.message);
+	}
+
 });
 
 
