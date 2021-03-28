@@ -52,8 +52,9 @@ router.get('/users/:userId', (req, res, next) => {
 	
 	User.findById(req.params.userId).populate(target).exec((err, user) => {
 		if (err) res.status(500).send(err);
-
-		let outputSnippets = user[target];
+		console.log('user:', user);
+		let outputSnippets = /*user[target]*/ user.snippetsReceived;
+		console.log(outputSnippets);
 		if (target === 'snippetsReceived') {
 			// Filter out future snippets
 			outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
@@ -80,10 +81,9 @@ router.post('/', (req, res, next) => {
 		recipient: req.body.recipient,
 		fileName: fileName,
 		tag: req.body.tag,
-		//creationDate: req.body.creationDate,
-		//scheduledDate: req.body.scheduledDate || req.body.creationDate,
-		creationDate: new Date(),
-		scheduledDate: new Date()
+		creationDate: req.body.creationDate,
+		scheduledDate: req.body.scheduledDate || req.body.creationDate,
+	
 	};
 
 	// Create the mongoDB entry
