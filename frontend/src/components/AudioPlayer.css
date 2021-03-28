@@ -1,0 +1,7 @@
+.audio-player audio::-webkit-media-controls-panel {
+  background: linear-gradient(90deg, var(--yellow) 0%, var(--orange) 100%);
+}
+.audio-player {
+  display: flex;
+  justify-content: center;
+}
