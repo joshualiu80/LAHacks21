@@ -88,7 +88,7 @@ const Friend = ({ user, setShowPopUp, friendsMap }) => {
         </div>
         <div id="schedule" className="tabcontent hidden">
           {friendInfo()}
-          <Schedule closePopUp={closePopUp}/>
+          <Schedule closePopUp={closePopUp} recipient={user}/>
         </div>
         <div id="settings" className="tabcontent hidden">
           {friendInfo()}

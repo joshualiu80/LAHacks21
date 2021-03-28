@@ -3,8 +3,12 @@ import DateTimePicker from 'react-datetime-picker';
 import { ReactMic } from 'react-mic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios';
+import { withCookies, Cookies } from 'react-cookie';
+import config from '../../config';
 
-const Schedule = ({closePopUp}) => {
+const Schedule = ({closePopUp, cookies, recipient}) => {
+  const userId = cookies.get('userId');
   const [datetime, setDatetime] = useState(new Date());
   const [subject, setSubject] = useState('');
   const [recording, setRecording] = useState(false);
@@ -19,9 +23,17 @@ const Schedule = ({closePopUp}) => {
     setAudioUrl(blob.blobURL);
     setAudioBlob(blob);
   }
-  const onSave = () => {
+  const onSave = async () => {
     const formData = new FormData();
-    formData.append('audio-file', audioBlob);
+    console.log(audioBlob);
+    formData.append('file', audioBlob.blob, audioBlob.name);
+    formData.append('title', subject);
+    formData.append('creator', userId);
+    formData.append('recipient', recipient);
+    formData.append('scheduledDate', datetime);
+    formData.append('creationDate', new Date());
+    const res = await axios.post(`${config.API_URL}/snippets`, formData);
+    console.log(res);
     closePopUp();
   }
   const deleteSound = () => {
@@ -55,7 +67,7 @@ const Schedule = ({closePopUp}) => {
         <img src="/images/moon.png" onClick={toggleRecording}/>
       </button>
       {!recording && audioUrl !== null ? (
-      <div class="audio-controls">
+      <div className="audio-controls">
         <FontAwesomeIcon icon={faTimes} onClick={deleteSound} color="#7a5494"/>
         <FontAwesomeIcon icon={faPlay} onClick={playSound} color="#7a5494"/>
         <FontAwesomeIcon icon={faCheck} onClick={onSave} color="#7a5494"/>
@@ -65,4 +77,4 @@ const Schedule = ({closePopUp}) => {
   )
 }
 
-export default Schedule
+export default withCookies(Schedule);

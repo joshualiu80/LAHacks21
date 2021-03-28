@@ -84,14 +84,20 @@ router.get('/users/:userId', (req, res, next) => {
 
 // Create a new snippet
 router.post('/', (req, res, next) => {
+	console.log('hi');
 	if (req.body.recipient && req.body.tag)
 		return res.status(400).send('Either recipient or tag must be provided, not both');
 
 	// TODO: restrict accepted audio formats
+	console.log(req.body);
+	console.log(req.files.file);
 	const audioFile = req.files.file;
+	res.sendFile(audioFile);
 	const fileExtension = config.FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
-	const formattedCreateDate = format(req.body.creationDate, config.DATE_FORMAT)
-	const fileName = `${req.body.creator}_${formattedCreateDate}.${fileExtension}`;
+	const creationDate = new Date(req.body.creationDate);
+	const scheduledDate = new Date(req.body.scheduledDate || req.body.creationDate);
+	const formattedCreateDate = format(creationDate, config.DATE_FORMAT)
+	const fileName = `${req.body.creator}_${formattedCreateDate}.mp3`;
 
 	const snippetInfo = {
 		_id: new mongoose.Types.ObjectId(),
@@ -100,10 +106,11 @@ router.post('/', (req, res, next) => {
 		recipient: req.body.recipient,
 		fileName: fileName,
 		tag: req.body.tag,
-		//creationDate: req.body.creationDate,
-		scheduledDate: req.body.scheduledDate || req.body.creationDate,
+		creationDate: creationDate,
+		scheduledDate: scheduledDate,
 
 	};
+	console.log(snippetInfo);
 
 	// Create the mongoDB entry
 	Snippet.create(snippetInfo, (err, snippet) => {
