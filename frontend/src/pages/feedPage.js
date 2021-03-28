@@ -4,6 +4,7 @@ import axios from 'axios';
 import { withCookies, Cookies } from 'react-cookie';
 import AudioPlayer from '../components/AudioPlayer';
 import './feedPage.css';
+import Navbar from '../components/Navbar';
 const exampleIMG = "https://images.ctfassets.net/hrltx12pl8hq/6YSoTmOYPk2VtQ7JSkPuzS/8250a3d54c1a714aa5e57f6a2826509e/shutterstock_1554086789.jpg?fit=fill&w=480&h=270";
 
 const FeedPage = (props) => {
@@ -12,6 +13,11 @@ const FeedPage = (props) => {
   const [newSnippets, setNewSnippets] = useState([]);
   const [snippetMap, setSnippetMap] = useState(null);
   const [currTab, setCurrTab] = useState(0);
+  const [showPopUp, setShowPopUp] = useState(false);
+
+  const closePopup = () => {
+    setShowPopUp(false);
+  }
 
   const renderTags = () => {
     return (
@@ -107,8 +113,9 @@ const FeedPage = (props) => {
   }, []); 
 
   return (
+    <>
     <div className="outermost">
-      <div className="navbar-placeholder"></div>
+      <Navbar/>
       <div className="feed-page-container">
         <div className="feed-page-left-side">
           <div className="tags-section">
@@ -120,10 +127,12 @@ const FeedPage = (props) => {
         </div>
         <div className="feed-page-right-sidebar">
           <p className="add-friend-button">Add Friend</p>
-          <p className="create-recording-button">Create Recording</p>
+          <p className="create-recording-button" onClick={() => {setShowPopUp(true)}}>Create Recording</p>
         </div>
       </div>
     </div>
+    {showPopUp ? (<Create closePopup={closePopup}/>) : null}
+    </>
   );
 
 }

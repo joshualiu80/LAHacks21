@@ -92,8 +92,10 @@ const Friend = ({ user, setShowPopUp, friendsMap }) => {
         </div>
         <div id="settings" className="tabcontent hidden">
           {friendInfo()}
+          <div className="settingsText">
           <h3>Settings</h3>
           <p>unadd friend or something here</p>
+          </div>
         </div>
       </div>
     </>
