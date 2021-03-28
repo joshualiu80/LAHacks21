@@ -4,11 +4,7 @@ import './Friend.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faClock, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons'
 import Schedule from './schedule.js'
-
-const DUMMYDATA = {
-  fname: 'Xuan',
-  lname: 'Vu'
-}
+import AudioPlayer from '../AudioPlayer';
 
 const Friend = ({ user, setShowPopUp }) => {
   const [currUser, setCurrUser] = useState(null);
@@ -37,6 +33,8 @@ const Friend = ({ user, setShowPopUp }) => {
   })();
 
   }, []);
+
+  if (currUser) console.log(currUser.snippetsSent);
 
   const friendInfo = () => {return (
     <div className="friend-info">
@@ -73,7 +71,7 @@ const Friend = ({ user, setShowPopUp }) => {
         </div>
         <div id="messages" className="tabcontent">
           {friendInfo()}
-          <p>wait don't we need to store a user's messages too? bc snippets are just scheduled ones right?</p>
+          <AudioPlayer audio={'paramore.mp3'} />
         </div>
         <div id="schedule" className="tabcontent hidden">
           {friendInfo()}
