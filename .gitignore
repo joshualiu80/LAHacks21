@@ -1,20 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-<<<<<<< HEAD
 **/node_modules
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-**/node_modules
-=======
-*/node_modules
->>>>>>> 508658464b063a8fc77859aa398935f798e3825e
->>>>>>> jl-login
-=======
-*/node_modules
->>>>>>> 508658464b063a8fc77859aa398935f798e3825e
->>>>>>> jl-login
 /.pnp
 .pnp.js
 
@@ -37,10 +24,4 @@ yarn-error.log*
 
 *.swp
 */public/files
-<<<<<<< HEAD
-<<<<<<< HEAD
 *.env
-=======
->>>>>>> jl-login
-=======
->>>>>>> jl-login
