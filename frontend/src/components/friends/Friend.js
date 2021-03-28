@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios';
 import './Friend.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faClock, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons'
+import { faComment, faClock, faEdit, faWindowClose, faFrown } from '@fortawesome/free-regular-svg-icons'
 import Schedule from './schedule.js'
 import AudioPlayer from '../AudioPlayer';
 import config from '../../config';
@@ -11,7 +11,7 @@ import config from '../../config';
 const Friend = ({ user, setShowPopUp, friendsMap }) => {
   const [currUser, setCurrUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const snippetList = friendsMap.get(user);
+  const snippetList = friendsMap.get(user) || [];
 
   const openTab = (e, tab) => {
     const content = document.getElementsByClassName('tabcontent');
@@ -53,7 +53,9 @@ const Friend = ({ user, setShowPopUp, friendsMap }) => {
 
   const displaySnippets = useMemo(() => snippetList.map(
     (snippet, i) => (
-      <AudioPlayer key={`snippet${i}`} fileName={snippet.fileName}/>
+      <div className="audioPlayer">
+      <AudioPlayer key={`snippet${i}`} audio={snippet.fileName} />
+      </div>
     )
   , [snippetList]));
 
@@ -80,7 +82,9 @@ const Friend = ({ user, setShowPopUp, friendsMap }) => {
         </div>
         <div id="messages" className="tabcontent">
           {friendInfo()}
-          {displaySnippets}
+          <div className="snippetList">
+          {(snippetList.length !== 0) ? displaySnippets : <div><p className="noMessages">No Messages</p><FontAwesomeIcon icon={faFrown} className="noMessages2" /></div>}
+          </div>
         </div>
         <div id="schedule" className="tabcontent hidden">
           {friendInfo()}
