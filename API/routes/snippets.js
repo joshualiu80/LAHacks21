@@ -40,6 +40,20 @@ router.get('/:fileName', (req, res, next) => {
 	ms.pipe(req, res, snippetLoc);
 });
 
+
+router.get('/notifications/:id', (req, res) => {
+	Snippet.find({ recipient: req.params.id }, (err, snippets) => {
+		if (err){
+			console.log(err);
+		}
+	})
+})
+
+
+
+
+
+
 router.post('/', (req, res, next) => {
 	// let audioFile = req.files.file;
 	// let uploadPath = `${AUDIO_FILE_LOCATION}/${audioFile.name}`;
