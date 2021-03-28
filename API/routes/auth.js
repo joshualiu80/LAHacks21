@@ -11,7 +11,7 @@ router.post('/verify', function(req, res) {
     }
     if (user) {
       if (password === user.password) {
-        res.status(200).send('Authentication successful!');
+        res.status(200).json(user);
       } else {
         res.status(401).send('Incorrect password');
       }
