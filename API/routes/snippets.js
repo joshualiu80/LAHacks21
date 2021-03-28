@@ -13,31 +13,32 @@ const DATE_FORMAT = 'yyyy.MM.dd_HH.mm.ss.SSS';
 router.get('/:id', (req, res) => {
 	Snippet.findById(req.params.id, (err, snippet) => {
 		if (err) {
-      console.log(err);
-      res.status(400).send('Error:' + err);
-    }
-    if (snippet) {
-      res.status(200).json(snippet);
-    } else {
-      res.status(400).send('Error:' + err);
-    }
+			console.log(err);
+			res.status(400).send('Error:' + err);
+		}
+		if (snippet) {
+			res.status(200).json(snippet);
+		} else {
+			res.status(400).send('Error:' + err);
+		}
 	})
 });
 
 router.get('/tag/:id', (req, res) => {
 	Snippet.find({ tag: req.params.id }, (err, snippets) => {
 		if (err) {
-      console.log(err);
-      res.status(400).send('Error:' + err);
-    }
-    if (snippets) {
-      res.status(200).json(snippets);
-    } else {
-      res.status(400).send('Error:' + err);
-    }
+			console.log(err);
+			res.status(400).send('Error:' + err);
+		}
+		if (snippets) {
+			res.status(200).json(snippets);
+		} else {
+			res.status(400).send('Error:' + err);
+		}
 	})
 });
 
+// Stream an audio file
 router.get('/:fileName', (req, res, next) => {
 	let snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
 	ms.pipe(req, res, snippetLoc);
@@ -45,7 +46,7 @@ router.get('/:fileName', (req, res, next) => {
 
 router.get('/notifications/:id', (req, res) => {
 	Snippet.find({ recipient: req.params.id }, (err, snippets) => {
-		if (err){
+		if (err) {
 			console.log(err);
 		}
 	})
@@ -74,6 +75,7 @@ router.post('/', (req, res, next) => {
 	if (req.body.recipient && req.body.tag)
 		return res.status(400).send('Either recipient or tag must be provided, not both');
 
+	// TODO: restrict accepted audio formats
 	let audioFile = req.files.file;
 	let fileExtension = FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
 	let formattedCreateDate = format(req.body.creationDate, DATE_FORMAT)
@@ -126,7 +128,7 @@ router.post('/', (req, res, next) => {
 			}
 
 			res.json({
-				file: `public/${fileName}`,
+				file: `fileName`,
 			});
 		}
 	);
