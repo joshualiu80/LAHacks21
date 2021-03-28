@@ -9,7 +9,7 @@ const snippetSchema = new Schema({
   fileName: { type: String, required: true },
   tag: { type: mongoose.Schema.Types.ObjectId },
   creationDate: { type: Date, required: true },
-  scheduledDate: { type: Date },
+  scheduledDate: { type: Date, required: true },
   listened: { type: Boolean, default: false }
 });
 
