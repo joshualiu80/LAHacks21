@@ -2,8 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-
-
 const app = express();
 
 require('dotenv').config();
@@ -39,12 +37,6 @@ app.use('/tags', tagRouter);
 app.use('/snippets', snippetRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
-
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function (err, req, res, next) {
