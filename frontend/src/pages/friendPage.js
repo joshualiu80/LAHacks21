@@ -57,7 +57,7 @@ const FriendPage = (props) => {
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className='displayView'>
                 {displayFriends}
             </div>

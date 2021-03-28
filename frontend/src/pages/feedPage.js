@@ -108,7 +108,7 @@ const FeedPage = (props) => {
 
   return (
     <div className="outermost">
-      <div className="navbar-placeholder"></div>
+      {/* <div className="navbar-placeholder"></div> */}
       <div className="feed-page-container">
         <div className="feed-page-left-side">
           <div className="tags-section">

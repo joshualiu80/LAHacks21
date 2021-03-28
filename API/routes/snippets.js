@@ -92,7 +92,8 @@ router.post('/', (req, res, next) => {
 	console.log(req.body);
 	console.log(req.files.file);
 	const audioFile = req.files.file;
-	res.sendFile(audioFile);
+	
+	// res.sendFile(audioFile);
 	const fileExtension = config.FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
 	const creationDate = new Date(req.body.creationDate);
 	const scheduledDate = new Date(req.body.scheduledDate || req.body.creationDate);
