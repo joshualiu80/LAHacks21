@@ -1,3 +1,4 @@
+import Create from '../components/create';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { withCookies, Cookies } from 'react-cookie';
