@@ -4,12 +4,11 @@ const Snippet = require('../models/snippet.model');
 const ms = require('mediaserver');
 const User = require('../models/user.model');
 const format = require('date-fns/format');
-const AUDIO_FILE_LOCATION = `${__dirname}/../public/files`;
-const FILE_EXTENSION_PATTERN = /(?:\.([^.]+))?$/;
-const DATE_FORMAT = 'yyyy.MM.dd_HH.mm.ss.SSS';
+const config = require('../config');
 
-
+// Get a snippet's info from its id
 router.get('/:id', (req, res) => {
+	// TODO: error handle bad id value (backend crashes)
 	Snippet.findById(req.params.id, (err, snippet) => {
 		if (err) {
 			console.log(err);
@@ -38,8 +37,9 @@ router.get('/tag/:id', (req, res) => {
 });
 
 // Stream an audio file
-router.get('/:fileName', (req, res, next) => {
-	const snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
+router.get('/files/:fileName', (req, res, next) => {
+	const snippetLoc = `${config.AUDIO_FILE_LOCATION}/${req.params.fileName}`;
+	console.log(snippetLoc)
 	ms.pipe(req, res, snippetLoc);
 });
 
@@ -76,8 +76,8 @@ router.post('/', (req, res, next) => {
 
 	// TODO: restrict accepted audio formats
 	const audioFile = req.files.file;
-	const fileExtension = FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
-	const formattedCreateDate = format(req.body.creationDate, DATE_FORMAT)
+	const fileExtension = config.FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
+	const formattedCreateDate = format(req.body.creationDate, config.DATE_FORMAT)
 	const fileName = `${req.body.creator}_${formattedCreateDate}.${fileExtension}`;
 
 	const snippetInfo = {
@@ -121,7 +121,7 @@ router.post('/', (req, res, next) => {
 
 	// Create the file on the server
 	audioFile.mv(
-		`${AUDIO_FILE_LOCATION}/${fileName}`,
+		`${config.AUDIO_FILE_LOCATION}/${fileName}`,
 		(err) => {
 			if (err) {
 				return res.status(500).send(err);

@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const { db } = require('../models/user.model');
 const User = require('../models/user.model');
 const ms = require('mediaserver');
-
-const PROFILE_FILE_LOCATION = `${__dirname}/../public/profiles`;
-const FILE_EXTENSION_PATTERN = /(?:\.([^.]+))?$/;
+const config = require('./../config');
 
 // Create a new user
 router.post('/', function (req, res) {
@@ -14,7 +12,7 @@ router.post('/', function (req, res) {
 
   if (req.files) {
     const profileImg = req.files.file;
-    const fileExtension = FILE_EXTENSION_PATTERN.exec(profileImg.name)[1];
+    const fileExtension = config.FILE_EXTENSION_PATTERN.exec(profileImg.name)[1];
     fileName = `${req.body.username}_profile.${fileExtension}`;
   }
 
@@ -32,7 +30,7 @@ router.post('/', function (req, res) {
       // Save profile image to server
       if (req.files) {
         profileImg.mv(
-          `${PROFILE_FILE_LOCATION}/${fileName}`,
+          `${config.PROFILE_FILE_LOCATION}/${fileName}`,
           (err) => {
             if (err) {
               return res.status(500).send(err);
@@ -97,11 +95,11 @@ router.get('/profile/:id', (req, res, next) => {
     if (err) res.status(500).send(err);
 
     if (user.profileImg) {
-      let profileLoc = `${PROFILE_FILE_LOCATION}/${user.profileImg}`;
+      let profileLoc = `${config.PROFILE_FILE_LOCATION}/${user.profileImg}`;
       ms.pipe(req, res, profileLoc);
     }
     else {
-      res.status(400).json({ message: 'no profile image' })
+      res.status(200).json({ message: 'no profile image' })
     }
   })
 });
