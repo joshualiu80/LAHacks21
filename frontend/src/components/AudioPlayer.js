@@ -1,6 +1,5 @@
 import React from 'react';
-
-const AUDIO_STREAM_URL = 'http://localhost:3000/snippets';
+import config from './../config';
 
 class AudioPlayer extends React.Component {
 	constructor(props) {
@@ -10,7 +9,7 @@ class AudioPlayer extends React.Component {
 	render() {
 		return (
 			<div>
-				<audio controls src={`${AUDIO_STREAM_URL}/${this.props.fileName}`}>Audio element not supported</audio>
+				<audio controls src={`${config.AUDIO_STREAM_URL}/${this.props.fileName}`}>Audio element not supported</audio>
 			</div>
 		);
 	}

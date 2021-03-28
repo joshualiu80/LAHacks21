@@ -4,6 +4,7 @@ import SignUp from '../components/SignUp';
 import axios from 'axios';
 import { withCookies, Cookies } from 'react-cookie';
 import './login.css';
+import config from './../config';
 
 
 const Login = (props) => {
@@ -34,7 +35,8 @@ const Login = (props) => {
 
     const submitLogin = async (e) => {
         e.preventDefault();
-        const res = await axios.post("http://localhost:3000/auth/verify",  { username: username, password: password });
+        console.log(config.AUTH_VERIFY_URL)
+        const res = await axios.post(config.AUTH_VERIFY_URL, { username: username, password: password });
         if (res.status === 200) {
             setLoggedIn(true);
             localStorage.setItem('loggedIn', true);
@@ -49,7 +51,7 @@ const Login = (props) => {
     return (
         <div className="Login">
             <div className="logo-header">
-                <img src="/images/logo.png" alt="LunaTalks Logo"/>
+                <img src="/images/logo.png" alt="LunaTalks Logo" />
                 <h1>LunaTalks</h1>
             </div>
             <form className="loginForm" onSubmit={submitLogin}>
@@ -57,7 +59,7 @@ const Login = (props) => {
                 <input className="password" type="password" placeholder="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit" className="login-btn">
                     <p>LOGIN</p>
-                    <img src="/images/comet.png"/>
+                    <img src="/images/comet.png" />
                 </button>
                 <p className="signup-link">Don't have an account? <b><span onClick={displayPopUp}>Sign up</span></b></p>
             </form>
