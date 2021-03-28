@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const snippetSchema = new Schema({
-  cr_id: { type: mongoose.Schema.Types.ObjectId, required: true },
+  _id: { type: mongoose.Schema.Types.ObjectId, required: true },
   title: { type: String, required: true },
   creator: { type: mongoose.Schema.Types.ObjectId, required: true },
   recipient: { type: mongoose.Schema.Types.ObjectId },

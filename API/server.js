@@ -4,8 +4,6 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const app = express();
 
-
-
 require('dotenv').config();
 
 const port = 3000;
@@ -27,28 +25,18 @@ const userRouter = require('./routes/users');
 const tagRouter = require('./routes/tags');
 const snippetRouter = require('./routes/snippets');
 const authRouter = require('./routes/auth');
-var uploadRouter = require('./routes/upload');
-
+const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(fileUpload());
-
 
 app.use('/users', userRouter);
 app.use('/tags', tagRouter);
 app.use('/snippets', snippetRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
-
-/*
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-*/
-
 
 // error handler
 app.use(function (err, req, res, next) {
