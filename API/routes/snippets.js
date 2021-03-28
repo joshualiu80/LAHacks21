@@ -12,31 +12,32 @@ const DATE_FORMAT = 'yyyy.MM.dd_HH.mm.ss.SSS';
 router.get('/:id', (req, res) => {
 	Snippet.findById(req.params.id, (err, snippet) => {
 		if (err) {
-      console.log(err);
-      res.status(400).send('Error:' + err);
-    }
-    if (snippet) {
-      res.status(200).json(snippet);
-    } else {
-      res.status(400).send('Error:' + err);
-    }
+			console.log(err);
+			res.status(400).send('Error:' + err);
+		}
+		if (snippet) {
+			res.status(200).json(snippet);
+		} else {
+			res.status(400).send('Error:' + err);
+		}
 	})
 });
 
 router.get('/tag/:id', (req, res) => {
 	Snippet.find({ tag: req.params.id }, (err, snippets) => {
 		if (err) {
-      console.log(err);
-      res.status(400).send('Error:' + err);
-    }
-    if (snippets) {
-      res.status(200).json(snippets);
-    } else {
-      res.status(400).send('Error:' + err);
-    }
+			console.log(err);
+			res.status(400).send('Error:' + err);
+		}
+		if (snippets) {
+			res.status(200).json(snippets);
+		} else {
+			res.status(400).send('Error:' + err);
+		}
 	})
 });
 
+// Stream an audio file
 router.get('/:fileName', (req, res, next) => {
 	const snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
 	ms.pipe(req, res, snippetLoc);
@@ -45,9 +46,9 @@ router.get('/:fileName', (req, res, next) => {
 // Get all snippets for a user
 router.get('/users/:userId', (req, res, next) => {
 	const target = (req.query.isSender && req.query.isSender.toLowerCase === 'true') ? 'snippetsSent' : 'snippetsReceived';
-	
+
 	const currentDate = new Date();
-	
+
 	Snippet.find({ recipient: req.params.userId }, (err, snippets) => {
 		if (err) {
 			console.log('Error:' + err);
@@ -73,6 +74,7 @@ router.post('/', (req, res, next) => {
 	if (req.body.recipient && req.body.tag)
 		return res.status(400).send('Either recipient or tag must be provided, not both');
 
+	// TODO: restrict accepted audio formats
 	const audioFile = req.files.file;
 	const fileExtension = FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
 	const formattedCreateDate = format(req.body.creationDate, DATE_FORMAT)
@@ -87,7 +89,7 @@ router.post('/', (req, res, next) => {
 		tag: req.body.tag,
 		//creationDate: req.body.creationDate,
 		scheduledDate: req.body.scheduledDate || req.body.creationDate,
-	
+
 	};
 
 	// Create the mongoDB entry
@@ -126,7 +128,7 @@ router.post('/', (req, res, next) => {
 			}
 
 			res.json({
-				file: `public/${fileName}`,
+				file: `fileName`,
 			});
 		}
 	);
@@ -135,7 +137,7 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', async (req, res) => {
 	try {
-		await Snippet.updateOne({_id: req.params.id}, { $set: { listened: true } });
+		await Snippet.updateOne({ _id: req.params.id }, { $set: { listened: true } });
 		res.status(200).send(`Snippet with id ${req.params.id} updated successfully!`);
 	} catch (err) {
 		console.log('Error: ' + err);

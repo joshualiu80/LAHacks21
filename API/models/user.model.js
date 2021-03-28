@@ -10,8 +10,8 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   friends: [{ type: mongoose.Schema.Types.ObjectId }],
   snippetsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }],
-  snippetsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }]
-
+  snippetsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }],
+  profileImg: { type: String }
 });
 
 const User = mongoose.model('users', userSchema);
