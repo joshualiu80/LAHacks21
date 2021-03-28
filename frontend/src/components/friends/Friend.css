@@ -4,6 +4,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 2;
 }
 .friend .tabs {
   display: flex;
@@ -27,6 +28,9 @@
 }
 .active-tab {
   background-color: white;
+}
+.hidden {
+  display: none;
 }
 .friend .tabcontent {
   padding: 20px 50px;
@@ -84,7 +88,7 @@
 }
 .record-btn {
   height: 75px;
-  background: linear-gradient(90deg, #7a5494 0%, #5449a4 100%);
+  background: #7a5494;
   border: none;
   border-radius: 37px;
   outline: none;
@@ -100,4 +104,19 @@
 .record-btn img {
   height: 100%;
   margin-left: auto;
+}
+.record-btn p {
+  position: absolute;
+  background-color: #7a5494;
+  width: 50%;
+}
+.record-btn .visualizer {
+  width: 75%;
+}
+.audio-controls {
+  display: flex;
+  grid-gap: 25px;
+  justify-content: center;
+  margin-top: -10px;
+  font-size: 2.5rem;
 }

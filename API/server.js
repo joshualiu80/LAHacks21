@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+
 const app = express();
 
 require('dotenv').config();
@@ -20,6 +21,12 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
+app.use(fileUpload());
+
 //routes
 const userRouter = require('./routes/users');
 const tagRouter = require('./routes/tags');
@@ -28,7 +35,9 @@ const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
+app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(fileUpload());
 

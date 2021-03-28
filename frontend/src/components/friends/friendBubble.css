@@ -1,0 +1,32 @@
+.profileCard {
+    /* width: 100px;
+    height: 100px; */
+    position: relative;
+    text-align: center;
+    font-size: medium;
+    font-family: Marker Felt, fantasy;
+    justify-content: center;
+    /* margin: 50px;  */
+    /* temp margin idk change maybe */
+}
+
+.bubble {
+    display:inline-block;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.bubble img {
+    display: inline;
+    margin: 0 auto;
+    margin-left: -50%;
+    height: 100%;
+    width: auto;
+}
+
+.name {
+    color: black;
+}
