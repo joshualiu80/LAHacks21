@@ -9,13 +9,75 @@
 }
 
 .tag-button {
-  background-color:cornflowerblue;
-  border-radius: 10px;
+  background-color:#C4C4C4;
+  border-radius: 40px;
   padding: 15px;
   margin: 0 10px;
 }
 
 .tag-button:first-of-type {
-  background-color: darkcyan;
   margin-right: 30px;
+}
+
+.selected {
+  background-color: #B95696;
+}
+
+
+.snippet-card {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
+  align-items: center;
+  border: 5px solid black;
+  padding: 10px;
+  border-radius: 60px ;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+.snippet-image {
+  display:inline-block;
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.snippet-name {
+  margin: 20px;
+}
+
+.snippet-card-left-div {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.feed-page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.feed-page-left-side {
+  width: 70vw;
+}
+
+.feed-page-right-sidebar {
+  width: 30vw;
+}
+
+.create-recording-button {
+  position: fixed;
+  bottom: 2vw;
+  right: 7.5vw;
+  background-color:#F3C558;
+  border-radius: 40px;
+  padding: 15px;
+}
+
+.tag-button:hover, .create-recording-button:hover {
+  cursor: pointer;
 }
