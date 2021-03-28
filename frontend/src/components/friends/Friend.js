@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import './Friend.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faClock, faEdit } from '@fortawesome/free-regular-svg-icons'
+import { faComment, faClock, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons'
 import Schedule from './schedule.js'
 
 const DUMMYDATA = {
@@ -9,7 +10,10 @@ const DUMMYDATA = {
   lname: 'Vu'
 }
 
-const Friend = ({ setShowPopUp }) => {
+const Friend = ({ user, setShowPopUp }) => {
+  const [currUser, setCurrUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
   const openTab = (e, tab) => {
     const content = document.getElementsByClassName('tabcontent');
     const tabs = document.getElementsByClassName('tablinks');
@@ -26,18 +30,37 @@ const Friend = ({ setShowPopUp }) => {
     e.currentTarget.classList.add('active-tab');
   }
 
-  const friendInfo = (
+  useEffect(() => { (async () => {
+      const res = await axios.get(`http://localhost:3000/users/${user}`);
+      setCurrUser(res.data);
+      setIsLoading(false);
+  })();
+
+  }, []);
+
+  const friendInfo = () => {return (
     <div className="friend-info">
       <div style={{ width: "50px", height: "50px", backgroundColor: "#7a5197", borderRadius: "50%" }}/>
-      <h1>{DUMMYDATA.fname + ' ' + DUMMYDATA.lname}</h1>
+      <h1>{currUser.fname + ' ' + currUser.lname}</h1>
     </div>
-  )
-  
+  );};
+
+  const closePopUp = () => {
+    console.log('hi');
+    setShowPopUp(false);
+  }
+
+  if (isLoading) {
+    return <div></div>;
+  }
   return (
     <>
       <div className="overlay"/>
       <div className="friend">
         <div className="tabs">
+          <button id="close" className="tablinks close" onClick={closePopUp}>
+            <FontAwesomeIcon icon={faWindowClose} />
+          </button>
           <button className="tablinks messages active-tab" onClick={(e) => {openTab(e, 'messages')}}>
             <FontAwesomeIcon icon={faComment}/>
           </button>
@@ -49,15 +72,15 @@ const Friend = ({ setShowPopUp }) => {
           </button>
         </div>
         <div id="messages" className="tabcontent">
-          {friendInfo}
+          {friendInfo()}
           <p>wait don't we need to store a user's messages too? bc snippets are just scheduled ones right?</p>
         </div>
         <div id="schedule" className="tabcontent hidden">
-          {friendInfo}
+          {friendInfo()}
           <Schedule />
         </div>
         <div id="settings" className="tabcontent hidden">
-          {friendInfo}
+          {friendInfo()}
           <h3>Settings</h3>
           <p>unadd friend or something here</p>
         </div>

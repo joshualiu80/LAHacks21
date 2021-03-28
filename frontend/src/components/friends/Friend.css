@@ -17,6 +17,9 @@
   font-size: 3rem;
   border-radius: 10px 0 0 10px;
 }
+.close {
+  background-color: rgba(255, 255, 255, 0.5);
+}
 .messages {
   background-color: #bb5098;
 }
