@@ -11,6 +11,7 @@ const userSchema = new Schema({
   friends: [{ type: mongoose.Schema.Types.ObjectId }],
   snippetsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }],
   snippetsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }]
+
 });
 
 const User = mongoose.model('users', userSchema);

@@ -4,8 +4,6 @@ const Snippet = require('../models/snippet.model');
 const ms = require('mediaserver');
 const User = require('../models/user.model');
 const format = require('date-fns/format');
-
-
 const AUDIO_FILE_LOCATION = `${__dirname}/../public/files`;
 const FILE_EXTENSION_PATTERN = /(?:\.([^.]+))?$/;
 const DATE_FORMAT = 'yyyy.MM.dd_HH.mm.ss.SSS';
@@ -68,22 +66,6 @@ router.get('/users/:userId', (req, res, next) => {
 
 		res.status(200).send(outputSnippets);
 	});
-
-	// User.findById(req.params.userId).populate(target).exec((err, user) => {
-	// 	if (err) {
-	// 		console.log('Error:' + err);
-	// 		res.status(500).send(err);
-	// 	}
-	// 	console.log('user:', user);
-	// 	let outputSnippets = /*user[target]*/ user.snippetsReceived;
-	// 	console.log(outputSnippets);
-	// 	if (target === 'snippetsReceived') {
-	// 		// Filter out future snippets
-	// 		outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
-	// 	}
-
-	// 	res.send(outputSnippets);
-	// });
 });
 
 // Create a new snippet
