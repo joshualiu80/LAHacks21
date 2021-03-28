@@ -17,7 +17,8 @@ const SignUp = ({ onClose }) => {
     data.append('password', password);
     data.append('fname', firstname);
     data.append('lname', lastname);
-    data.append('file', profile, profile.name);
+    if (profile)
+      data.append('file', profile, profile.name);
     const res = await axios.post(config.USERS_URL, data);
     console.log(res);
     e.preventDefault();
