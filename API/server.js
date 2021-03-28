@@ -5,8 +5,8 @@ const cors = require('cors');
 const path = require('path');
 const createError = require('http-errors')
 
-const app = express();
 
+const app = express();
 
 require('dotenv').config();
 
@@ -23,6 +23,12 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
+
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cors());
+app.use(fileUpload());
 
 //routes
 const userRouter = require('./routes/users');

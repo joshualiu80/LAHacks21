@@ -9,17 +9,10 @@ const SignUp = ({ onClose }) => {
   const [password, setPassword] = useState("");
 
   const signup = async (e) => {
-    const newUser = {
-      fname: firstname,
-      lname: lastname,
-      username: username,
-      password: password
-    }
-    console.log(newUser);
-    const res = await axios.post("http://localhost:3000/users/", { username: username, password: password, fname: firstname, lname: lastname } );
+    const res = await axios.post("http://localhost:3000/users", { username: username, password: password, fname: firstname, lname: lastname } );
     console.log(res);
     e.preventDefault();
-    //onClose();
+    onClose();
     // validation? if username already exists or if name is already in db
     // make POST req with newUser
     // reset form? or display confirmation message
@@ -29,16 +22,16 @@ const SignUp = ({ onClose }) => {
   return (
     <>
       <div className="overlay"/>
-        <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
-          <span className="close" onClick={onClose}>x</span>
-          <div>
-            <input type="text" placeholder="First Name" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-            <input type="text" placeholder="Last Name" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-          </div>
-            <input type="text" placeholder="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit" onClick={signup}>Sign Up</button>
-        </form>
+      <form className="signup-form" onSubmit={(e) => e.preventDefault()}>
+        <span onClick={onClose}>X</span>
+        <div>
+          <input type="text" placeholder="First Name" name="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} style={{marginRight: "25px"}} />
+          <input type="text" placeholder="Last Name" name="lastname" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+        </div>
+          <input type="text" placeholder="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button type="submit" className="signup-btn" onClick={signup}>SIGN UP</button>
+      </form>
     </>
   )
 }
