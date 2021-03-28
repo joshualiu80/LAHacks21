@@ -35,7 +35,7 @@
 .hidden {
   display: none;
 }
-.friend .tabcontent {
+.tabcontent {
   padding: 20px 50px;
   background-color: white;
   border-radius: 0 10px 10px 10px;
