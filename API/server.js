@@ -35,7 +35,6 @@ const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
@@ -56,6 +55,7 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.send(err.message);
+
 });
 
 app.listen(port, () => {

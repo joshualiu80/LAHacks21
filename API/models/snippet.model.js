@@ -6,11 +6,11 @@ const snippetSchema = new Schema({
   title: { type: String, required: true },
   creator: { type: mongoose.Schema.Types.ObjectId, required: true },
   recipient: { type: mongoose.Schema.Types.ObjectId },
-  audioFile: { type: String, required: true },
+  fileName: { type: String, required: true },
   tag: { type: mongoose.Schema.Types.ObjectId },
   creationDate: { type: Date, required: true },
-  scheduledDate: { type: Date },
-  listened: { type: Boolean }
+  scheduledDate: { type: Date, required: true },
+  listened: { type: Boolean, default: false }
 });
 
 const Snippet = mongoose.model('snippets', snippetSchema);
