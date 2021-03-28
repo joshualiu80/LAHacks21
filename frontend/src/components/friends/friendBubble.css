@@ -1,6 +1,5 @@
 .profileCard {
-    /* width: 100px;
-    height: 100px; */
+    width: 300px;
     position: relative;
     text-align: center;
     font-size: medium;
@@ -8,7 +7,25 @@
     justify-content: center;
     /* margin: 50px;  */
     /* temp margin idk change maybe */
+    --animation-time: 3s;
+	transform: translatey(0px);
+	animation: float var(--animation-time) ease-in-out infinite;
+    
 }
+
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
 
 .bubble {
     display:inline-block;
@@ -17,6 +34,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    box-shadow: 0 20px 30px 10px rgba(0,0,0,0.6);
 }
 
 .bubble img {
@@ -27,6 +45,27 @@
     width: auto;
 }
 
-.name {
-    color: black;
+
+.dummy{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+.name {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-weight: bolder;
+    font-size: large;
+    padding: 10px;
+    background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+    background: rgba(204, 204, 204, 0.4);
+    border-radius: 20px;
+    margin: 35px;
+    width:fit-content;
+    display: inline-block;  
+
+   
+    
+}
+

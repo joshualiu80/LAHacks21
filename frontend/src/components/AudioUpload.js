@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
-const AUDIO_UPLOAD_URL = 'http://localhost:3000/upload';
+import config from './../config';
 
 class AudioUpload extends React.Component {
 	constructor(props) {
@@ -13,7 +12,7 @@ class AudioUpload extends React.Component {
 		const data = new FormData();
 		data.append('file', this.state.selectedFile, this.state.selectedFile.name);
 
-		axios.post(AUDIO_UPLOAD_URL, data, {
+		axios.post(config.AUDIO_UPLOAD_URL, data, {
 			onUploadProgress: ProgressEvent => {
 
 				this.setState({ loaded: (ProgressEvent.loaded / ProgressEvent.total * 100) });

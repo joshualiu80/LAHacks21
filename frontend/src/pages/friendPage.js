@@ -4,10 +4,11 @@ import FriendBubble from '../components/friends/friendBubble';
 import Friend from '../components/friends/Friend';
 import { withCookies, Cookies } from 'react-cookie';
 import './friendPage.css';
+import config from './../config';
 
 const exampleIMG = "https://images.ctfassets.net/hrltx12pl8hq/6YSoTmOYPk2VtQ7JSkPuzS/8250a3d54c1a714aa5e57f6a2826509e/shutterstock_1554086789.jpg?fit=fill&w=480&h=270";
 const exampleUserId = "605ece9f30695a7a5428dc0c";
-const exampleFriendsList = [{username: 'Mingjia', profilePic: exampleIMG}, {username: 'Josh', profilePic: exampleIMG}, {username: 'Ethan', profilePic: exampleIMG}, {username: 'Braedon', profilePic: exampleIMG}, {username: 'Xuan', profilePic: exampleIMG}];
+const exampleFriendsList = [{ username: 'Mingjia', profilePic: exampleIMG }, { username: 'Josh', profilePic: exampleIMG }, { username: 'Ethan', profilePic: exampleIMG }, { username: 'Braedon', profilePic: exampleIMG }, { username: 'Xuan', profilePic: exampleIMG }];
 
 const FriendPage = (props) => {
     const { cookies } = props;
