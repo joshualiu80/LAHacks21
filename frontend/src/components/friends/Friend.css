@@ -17,6 +17,18 @@
   font-size: 3rem;
   border-radius: 10px 0 0 10px;
 }
+.friend .snippetList {
+  margin-top: 100px;
+}
+.friend .audioPlayer {
+  margin: 20px;
+}
+.friend .noMessages {
+  font-size: xx-large;
+}
+.friend .noMessages2 {
+  font-size: 100px;
+}
 .close {
   background-color: rgba(255, 255, 255, 0.5);
 }
@@ -37,16 +49,23 @@
 }
 .tabcontent {
   padding: 20px 50px;
+  padding-top: 0;
   background-color: white;
   border-radius: 0 10px 10px 10px;
   width: 400px;
   height: 400px;
+  overflow-y: scroll;
 }
 .friend-info {
   display: flex;
   grid-gap: 10px;
   align-items: center;
   margin-left: -30px;
+  position:absolute;
+  background-color: white;
+  z-index: 2;
+  width: 450px;
+  padding-top: 20px;
 }
 .friend-info h1 {
   margin: 0;
