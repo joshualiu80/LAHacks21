@@ -8,9 +8,18 @@ const SignUp = ({ onClose }) => {
   const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [profile, setProfile] = useState(null);
 
   const signup = async (e) => {
-    const res = await axios.post(config.USERS_URL, { username: username, password: password, fname: firstname, lname: lastname });
+    console.log(profile);
+    const data = new FormData();
+    data.append('username', username);
+    data.append('password', password);
+    data.append('fname', firstname);
+    data.append('lname', lastname);
+    if (profile)
+      data.append('file', profile, profile.name);
+    const res = await axios.post(config.USERS_URL, data);
     console.log(res);
     e.preventDefault();
     onClose();
@@ -31,6 +40,10 @@ const SignUp = ({ onClose }) => {
         </div>
         <input type="text" placeholder="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div id="profile-upload-field">
+          <p>Profile Pic:</p>
+          <input type="file" name="file" onChange={(e) => setProfile(e.target.files[0])} />
+        </div>
         <button type="submit" className="signup-btn" onClick={signup}>SIGN UP</button>
       </form>
     </>
