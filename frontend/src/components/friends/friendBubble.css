@@ -34,7 +34,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 50%;
-    box-shadow: 0 20px 30px 10px rgba(0,0,0,0.6);
+    box-shadow: 0 10px 10px 0px rgba(0,0,0,0.6);
 }
 
 .bubble img {
