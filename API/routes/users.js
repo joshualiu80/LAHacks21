@@ -8,10 +8,11 @@ const config = require('./../config');
 // Create a new user
 router.post('/', function (req, res) {
   // TODO: restrict image formats
+  let profileImg = null;
   let fileName = null;
 
   if (req.files) {
-    const profileImg = req.files.file;
+    profileImg = req.files.file;
     const fileExtension = config.FILE_EXTENSION_PATTERN.exec(profileImg.name)[1];
     fileName = `${req.body.username}_profile.${fileExtension}`;
   }
@@ -89,18 +90,17 @@ router.get('/getFriends/:id', function (req, res) {
       })
 });
 
-// Stream an profile image
+// Send a profile image
 router.get('/profile/:id', (req, res, next) => {
   User.findById(req.params.id, 'profileImg', (err, user) => {
     if (err) res.status(500).send(err);
 
+    let profileLoc = `${config.PROFILE_FILE_LOCATION}/${config.DEFAULT_PROFILE}`;
     if (user.profileImg) {
-      let profileLoc = `${config.PROFILE_FILE_LOCATION}/${user.profileImg}`;
-      ms.pipe(req, res, profileLoc);
+      profileLoc = `${config.PROFILE_FILE_LOCATION}/${user.profileImg}`;
     }
-    else {
-      res.status(200).json({ message: 'no profile image' })
-    }
+
+    res.sendFile(profileLoc);
   })
 });
 
