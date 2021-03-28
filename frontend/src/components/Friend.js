@@ -8,8 +8,8 @@ const DUMMYDATA = {
   fname: 'Xuan',
   lname: 'Vu'
 }
-
-const Friend = () => {
+// use user prop to fetch data from backend
+const Friend = (user) => {
   const [subject, setSubject] = useState('');
   const [datetime, setDatetime] = useState(new Date());
 
