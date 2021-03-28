@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SignUp from '../components/SignUp';
+import SignUp from '../components/login/SignUp';
 import axios from 'axios';
 
 const Login = () => {
