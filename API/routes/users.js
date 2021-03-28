@@ -94,6 +94,7 @@ router.get('/getFriends/:id', function (req, res) {
 router.get('/profile/:id', (req, res, next) => {
   User.findById(req.params.id, 'profileImg', (err, user) => {
     if (err) res.status(500).send(err);
+    if (!user) res.status(500).send('user is null');
 
     let profileLoc = `${config.PROFILE_FILE_LOCATION}/${config.DEFAULT_PROFILE}`;
     if (user.profileImg) {
