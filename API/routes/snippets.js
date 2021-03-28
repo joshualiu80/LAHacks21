@@ -7,7 +7,7 @@ const format = require('date-fns/format');
 const config = require('../config');
 
 // Get a snippet's info from its id
-router.get('/:id', (req, res) => {
+router.get('/snippet/:id', (req, res) => {
 	// TODO: error handle bad id value (backend crashes)
 	Snippet.findById(req.params.id, (err, snippet) => {
 		if (err) {
@@ -35,6 +35,20 @@ router.get('/tag/:id', (req, res) => {
 		}
 	})
 });
+
+router.get('/tagged', (req, res) => {
+	Snippet.find({ tag: { $exists: true } }, (err, taggedSnippets) => {
+		if (err) {
+			console.log(err);
+			res.status(400).send('Error:' + err);
+		}
+		if (taggedSnippets) {
+			res.status(200).json(taggedSnippets);
+		} else {
+			res.status(400).send('Error:' + err);
+		}
+	})
+})
 
 // Stream an audio file
 router.get('/files/:fileName', (req, res, next) => {

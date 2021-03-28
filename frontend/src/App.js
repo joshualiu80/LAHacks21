@@ -4,6 +4,7 @@ import { CookiesProvider } from 'react-cookie';
 import './App.css';
 import Login from './pages/login';
 import FriendPage from './pages/friendPage';
+import FeedPage from './pages/feedPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/friends" component={FriendPage} />
+        <Route exact path="/feed" component={FeedPage} />
       </Switch>
     </Router>
     </CookiesProvider>

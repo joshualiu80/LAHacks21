@@ -47,7 +47,7 @@
 .hidden {
   display: none;
 }
-.friend .tabcontent {
+.tabcontent {
   padding: 20px 50px;
   padding-top: 0;
   background-color: white;
@@ -130,7 +130,7 @@
 .record-btn p {
   position: absolute;
   background-color: #7a5494;
-  width: 50%;
+  width: 275px;
 }
 .record-btn .visualizer {
   width: 75%;
