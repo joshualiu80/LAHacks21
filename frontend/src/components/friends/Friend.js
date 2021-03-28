@@ -47,7 +47,6 @@ const Friend = ({ user, setShowPopUp }) => {
   };
 
   const closePopUp = () => {
-    console.log('hi');
     setShowPopUp(false);
   }
 

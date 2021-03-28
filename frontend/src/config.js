@@ -1,6 +1,6 @@
 let config = {};
 
-const USE_LOCALHOST = false;
+const USE_LOCALHOST = true;
 config.API_URL = (USE_LOCALHOST) ? 'http://localhost:3000' : 'http://jytte.ddns.net:3000';
 
 config.AUDIO_STREAM_URL = `${config.API_URL}/snippets`;

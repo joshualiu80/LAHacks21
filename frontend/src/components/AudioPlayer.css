@@ -5,3 +5,21 @@
   display: flex;
   justify-content: center;
 }
+.audio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 10px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.audio-tags label {
+  background-color: #c4c4c4;
+  padding: 5px 10px;
+  border-radius: 25px;
+  font-weight: 400;
+  color: white;
+}
+.active-tag {
+  background-color: var(--yellow) !important;
+  color: black !important;
+}
