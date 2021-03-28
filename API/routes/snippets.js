@@ -62,7 +62,6 @@ router.get('/users/:userId', (req, res, next) => {
 			outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
 		}
 
-		outputSnippets = outputSnippets.map(snippet => snippet._id);
 		console.log(outputSnippets);
 
 		res.status(200).send(outputSnippets);

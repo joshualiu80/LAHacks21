@@ -11,18 +11,41 @@ const exampleFriendsList = [{username: 'Mingjia', profilePic: exampleIMG}, {user
 
 const FriendPage = (props) => {
     const { cookies } = props;
+    const userId = cookies.get('userId');
     const [showPopUp, setShowPopUp] = useState(false);
     const [friendToOpen, setFriendToOpen] = useState("");
-    const [friendsList, setFriendsList] = useState([]); //temp for testing
+    const [friendsList, setFriendsList] = useState([]);
+    const [friendsMap, setFriendsMap] = useState(null);
 
     useEffect(() => {
         (async () => {
-            const userId = cookies.get('userId');
             const res = await axios.get(`http://localhost:3000/users/getFriends/${userId}`);
             setFriendsList(res.data);
         })();
-    }
-    , []); 
+
+    }, []); 
+
+    let snippetMap = new Map();
+
+    useEffect(() => {
+        (async () => {
+            let snippetList = await axios.get(`http://localhost:3000/snippets/users/${userId}`);
+            console.log('snippetList:', snippetList);
+            snippetList.data.map((snippet => {
+                let currFriendSnipList = snippetMap.get(snippet.creator);
+                console.log('currFriendSnipList:', currFriendSnipList);
+                if (currFriendSnipList === undefined) {
+                    currFriendSnipList = [];
+                }
+                currFriendSnipList.push(snippet);
+                snippetMap.set(snippet.creator, currFriendSnipList);
+                return snippet;
+            }));
+            console.log('snippetMap:', snippetMap);
+            setFriendsMap(snippetMap);
+        })();
+
+    }, []);
 
     const displayFriends = useMemo(() => friendsList.map(
         (friend) => (
@@ -35,7 +58,7 @@ const FriendPage = (props) => {
             <div className='displayView'>
                 {displayFriends}
             </div>
-            {showPopUp ? <Friend user={friendToOpen} setShowPopUp={setShowPopUp} /> : null}
+            {showPopUp ? <Friend user={friendToOpen} setShowPopUp={setShowPopUp} friendsMap={friendsMap}/> : null}
         </div>
     );
 }

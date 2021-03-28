@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios';
 import './Friend.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faClock, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons'
 import Schedule from './schedule.js'
+import AudioPlayer from '../AudioPlayer';
 
 const DUMMYDATA = {
   fname: 'Xuan',
   lname: 'Vu'
 }
 
-const Friend = ({ user, setShowPopUp }) => {
+const Friend = ({ user, setShowPopUp, friendsMap }) => {
   const [currUser, setCurrUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const snippetList = friendsMap.get(user);
 
   const openTab = (e, tab) => {
     const content = document.getElementsByClassName('tabcontent');
@@ -46,9 +48,14 @@ const Friend = ({ user, setShowPopUp }) => {
   );};
 
   const closePopUp = () => {
-    console.log('hi');
     setShowPopUp(false);
   }
+
+  const displaySnippets = useMemo(() => snippetList.map(
+    (snippet, i) => (
+      <AudioPlayer key={`snippet${i}`} fileName={snippet.fileName}/>
+    )
+  , [snippetList]));
 
   if (isLoading) {
     return <div></div>;
@@ -73,7 +80,7 @@ const Friend = ({ user, setShowPopUp }) => {
         </div>
         <div id="messages" className="tabcontent">
           {friendInfo()}
-          <p>wait don't we need to store a user's messages too? bc snippets are just scheduled ones right?</p>
+          {displaySnippets}
         </div>
         <div id="schedule" className="tabcontent hidden">
           {friendInfo()}
