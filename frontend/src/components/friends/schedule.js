@@ -7,7 +7,7 @@ import axios from 'axios';
 import { withCookies, Cookies } from 'react-cookie';
 import config from '../../config';
 
-const Schedule = ({closePopUp, cookies, recipient}) => {
+const Schedule = ({ closePopUp, cookies, recipient }) => {
   const userId = cookies.get('userId');
   const [datetime, setDatetime] = useState(new Date());
   const [subject, setSubject] = useState('');
@@ -25,13 +25,15 @@ const Schedule = ({closePopUp, cookies, recipient}) => {
   }
   const onSave = async () => {
     const formData = new FormData();
-    console.log(audioBlob);
-    formData.append('file', audioBlob.blob, audioBlob.name);
+    const audioFile = new File([audioBlob.blob], 'blob.mp3');
+
+    formData.append('file', audioFile, audioFile.name);
     formData.append('title', subject);
     formData.append('creator', userId);
     formData.append('recipient', recipient);
     formData.append('scheduledDate', datetime);
     formData.append('creationDate', new Date());
+
     const res = await axios.post(`${config.API_URL}/snippets`, formData);
     console.log(res);
     closePopUp();
@@ -55,23 +57,23 @@ const Schedule = ({closePopUp, cookies, recipient}) => {
         clearIcon={null}
         minDate={new Date()}
       />
-      <button className="record-btn" onClick={(e) => {e.preventDefault()}}>
+      <button className="record-btn" onClick={(e) => { e.preventDefault() }}>
         <ReactMic
           record={recording}
           onStop={onStop}
-          mimeType="audio/mp3" 
+          mimeType="audio/mp3"
           strokeColor="#ffffff"
           backgroundColor="#7a5494" />
         {!recording && audioUrl === null ? <p>click the moon to record</p> : null}
         {!recording && audioUrl !== null ? <p>play back your audio recording</p> : null}
-        <img src="/images/moon.png" onClick={toggleRecording}/>
+        <img src="/images/moon.png" onClick={toggleRecording} />
       </button>
       {!recording && audioUrl !== null ? (
-      <div className="audio-controls">
-        <FontAwesomeIcon icon={faTimes} onClick={deleteSound} color="#7a5494"/>
-        <FontAwesomeIcon icon={faPlay} onClick={playSound} color="#7a5494"/>
-        <FontAwesomeIcon icon={faCheck} onClick={onSave} color="#7a5494"/>
-      </div>
+        <div className="audio-controls">
+          <FontAwesomeIcon icon={faTimes} onClick={deleteSound} color="#7a5494" />
+          <FontAwesomeIcon icon={faPlay} onClick={playSound} color="#7a5494" />
+          <FontAwesomeIcon icon={faCheck} onClick={onSave} color="#7a5494" />
+        </div>
       ) : null}
     </form>
   )
