@@ -7,7 +7,7 @@ router.post('/verify', function(req, res) {
   User.findOne({ username: username }, function (err, user) {
     if (err) {
       console.log(err);
-      res.status(400).send('Server error');
+      res.status(401).send(err);
     }
     if (user) {
       if (password === user.password) {

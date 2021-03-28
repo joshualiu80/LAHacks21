@@ -2,9 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-const path = require('path');
-const createError = require('http-errors')
-
 
 const app = express();
 
@@ -38,8 +35,9 @@ const authRouter = require('./routes/auth');
 const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(fileUpload());
 
@@ -48,11 +46,6 @@ app.use('/tags', tagRouter);
 app.use('/snippets', snippetRouter);
 app.use('/auth', authRouter);
 app.use('/upload', uploadRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
 
 // error handler
 app.use(function (err, req, res, next) {
