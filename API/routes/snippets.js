@@ -5,6 +5,7 @@ const ms = require('mediaserver');
 const User = require('../models/user.model');
 const format = require('date-fns/format');
 
+
 const AUDIO_FILE_LOCATION = `${__dirname}/../public/files`;
 const FILE_EXTENSION_PATTERN = /(?:\.([^.]+))?$/;
 const DATE_FORMAT = 'yyyy.MM.dd_HH.mm.ss.SSS';
@@ -39,45 +40,38 @@ router.get('/tag/:id', (req, res) => {
 });
 
 router.get('/:fileName', (req, res, next) => {
-	let snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
+	const snippetLoc = `${AUDIO_FILE_LOCATION}/${req.params.fileName}`;
 	ms.pipe(req, res, snippetLoc);
 });
 
-router.get('/notifications/:id', (req, res) => {
-	Snippet.find({ recipient: req.params.id }, (err, snippets) => {
-		if (err){
-			console.log(err);
-		}
-	})
-})
-
-
-
 // Get all snippets for a user
 router.get('/users/:userId', (req, res, next) => {
-	let target = (req.query.sent) ? 'snippetsSent' : 'snippetsReceived';
-	User.findById(req.params.userId, target, (err, user) => {
+	const target = (req.query.isSender && req.query.isSender.toLowerCase === 'true') ? 'snippetsSent' : 'snippetsReceived';
+	
+	const currentDate = new Date();
+	
+	User.findById(req.params.userId).populate(target).exec((err, user) => {
 		if (err) res.status(500).send(err);
 
 		let outputSnippets = user[target];
-		if (!req.query.all) {
+		if (target === 'snippetsReceived') {
 			// Filter out future snippets
-			outputSnippets = outputSnippets.filter(snippet => !snippet.scheduledDate || snippet.scheduledDate < new Date());
+			outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
 		}
 
 		res.send(outputSnippets);
 	});
 });
-// Create a new snippet
 
+// Create a new snippet
 router.post('/', (req, res, next) => {
 	if (req.body.recipient && req.body.tag)
 		return res.status(400).send('Either recipient or tag must be provided, not both');
 
-	let audioFile = req.files.file;
-	let fileExtension = FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
-	let formattedCreateDate = format(req.body.creationDate, DATE_FORMAT)
-	let fileName = `${req.body.creator}_${formattedCreateDate}.${fileExtension}`;
+	const audioFile = req.files.file;
+	const fileExtension = FILE_EXTENSION_PATTERN.exec(audioFile.name)[1];
+	const formattedCreateDate = format(req.body.creationDate, DATE_FORMAT)
+	const fileName = `${req.body.creator}_${formattedCreateDate}.${fileExtension}`;
 
 	const snippetInfo = {
 		_id: new mongoose.Types.ObjectId(),
@@ -86,8 +80,10 @@ router.post('/', (req, res, next) => {
 		recipient: req.body.recipient,
 		fileName: fileName,
 		tag: req.body.tag,
-		creationDate: req.body.creationDate,
-		scheduledDate: req.body.scheduledDate || req.body.creationDate,
+		//creationDate: req.body.creationDate,
+		//scheduledDate: req.body.scheduledDate || req.body.creationDate,
+		creationDate: new Date(),
+		scheduledDate: new Date()
 	};
 
 	// Create the mongoDB entry
@@ -132,5 +128,10 @@ router.post('/', (req, res, next) => {
 	);
 });
 
+/*
+router.put('/:id', (req, res) => {
 
+	
+});
+*/
 module.exports = router;
