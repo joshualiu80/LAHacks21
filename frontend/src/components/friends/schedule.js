@@ -4,7 +4,7 @@ import { ReactMic } from 'react-mic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const Schedule = () => {
+const Schedule = ({closePopUp}) => {
   const [datetime, setDatetime] = useState(new Date());
   const [subject, setSubject] = useState('');
   const [recording, setRecording] = useState(false);
@@ -22,6 +22,7 @@ const Schedule = () => {
   const onSave = () => {
     const formData = new FormData();
     formData.append('audio-file', audioBlob);
+    closePopUp();
   }
   const deleteSound = () => {
     setAudioUrl(null);
@@ -50,7 +51,7 @@ const Schedule = () => {
           strokeColor="#ffffff"
           backgroundColor="#7a5494" />
         {!recording && audioUrl === null ? <p>click the moon to record</p> : null}
-        {!recording && audioUrl !== null ? <p>audio waveform goes here</p> : null}
+        {!recording && audioUrl !== null ? <p>play back your audio recording</p> : null}
         <img src="/images/moon.png" onClick={toggleRecording}/>
       </button>
       {!recording && audioUrl !== null ? (

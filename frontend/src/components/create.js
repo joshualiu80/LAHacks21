@@ -54,36 +54,39 @@ const Create = () => {
   }
 
   return (
-    <div className="tabcontent">
-      <div className="audio-tags">
-        {tags.map((tag) => {
-          return (
-            <>
-              <input type="radio" id={tag.name} name="audio-tag" onChange={selectTag} style={{display: 'none'}}/>
-              <label for={tag.name}>{tag.name}</label>
-            </>
-            )
-        })}
+    <>
+      <div className="overlay" />
+      <div className="tabcontent" style={{zIndex: "2", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", borderRadius: "20px"}}>
+        <div className="audio-tags">
+          {tags.map((tag) => {
+            return (
+              <>
+                <input type="radio" id={tag.name} name="audio-tag" onChange={selectTag} style={{display: 'none'}}/>
+                <label for={tag.name}>{tag.name}</label>
+              </>
+              )
+          })}
+        </div>
+        <button className="record-btn" onClick={(e) => {e.preventDefault()}}>
+          <ReactMic
+            record={recording}
+            onStop={onStop}
+            mimeType="audio/mp3" 
+            strokeColor="#ffffff"
+            backgroundColor="#7a5494" />
+          {!recording && audioUrl === null ? <p>click the moon to record</p> : null}
+          {!recording && audioUrl !== null ? <p>play back your audio recording</p> : null}
+          <img src="/images/moon.png" onClick={toggleRecording}/>
+        </button>
+        {!recording && audioUrl !== null ? (
+        <div class="audio-controls" style={{marginTop: "25px"}}>
+          <FontAwesomeIcon icon={faTimes} onClick={deleteSound} color="#7a5494"/>
+          <FontAwesomeIcon icon={faPlay} onClick={playSound} color="#7a5494"/>
+          <FontAwesomeIcon icon={faCheck} onClick={onSave} color="#7a5494"/>
+        </div>
+        ) : null}
       </div>
-      <button className="record-btn" onClick={(e) => {e.preventDefault()}}>
-        <ReactMic
-          record={recording}
-          onStop={onStop}
-          mimeType="audio/mp3" 
-          strokeColor="#ffffff"
-          backgroundColor="#7a5494" />
-        {!recording && audioUrl === null ? <p style={{width: "32%"}}>click the moon to record</p> : null}
-        {!recording && audioUrl !== null ? <p style={{width: "32%"}}>audio waveform goes here</p> : null}
-        <img src="/images/moon.png" onClick={toggleRecording}/>
-      </button>
-      {!recording && audioUrl !== null ? (
-      <div class="audio-controls">
-        <FontAwesomeIcon icon={faTimes} onClick={deleteSound} color="#7a5494"/>
-        <FontAwesomeIcon icon={faPlay} onClick={playSound} color="#7a5494"/>
-        <FontAwesomeIcon icon={faCheck} onClick={onSave} color="#7a5494"/>
-      </div>
-      ) : null}
-    </div>
+    </>
   )
 }
 
