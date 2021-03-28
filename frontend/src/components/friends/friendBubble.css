@@ -54,12 +54,12 @@
 }
 .name {
     font-family: 'Courier New', Courier, monospace;
-    color: white;
+    color: black;
     font-weight: bolder;
     font-size: large;
     padding: 10px;
     background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
-    background: rgba(204, 204, 204, 0.4);
+    background: rgba(204, 204, 204, 0.8);
     border-radius: 20px;
     margin: 35px;
     width:fit-content;
