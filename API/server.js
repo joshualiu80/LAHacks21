@@ -27,14 +27,12 @@ const userRouter = require('./routes/users');
 const tagRouter = require('./routes/tags');
 const snippetRouter = require('./routes/snippets');
 const authRouter = require('./routes/auth');
-var uploadRouter = require('./routes/upload');
+const uploadRouter = require('./routes/upload');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
 app.use(cors());
 app.use(fileUpload());
-
 
 app.use('/users', userRouter);
 app.use('/tags', tagRouter);
