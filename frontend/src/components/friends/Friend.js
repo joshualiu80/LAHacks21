@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faClock, faEdit, faWindowClose } from '@fortawesome/free-regular-svg-icons'
 import Schedule from './schedule.js'
 import AudioPlayer from '../AudioPlayer';
+import config from '../../config';
+
 
 const Friend = ({ user, setShowPopUp }) => {
   const [currUser, setCurrUser] = useState(null);
