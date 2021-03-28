@@ -35,7 +35,7 @@ const FriendPage = (props) => {
             <div className='displayView'>
                 {displayFriends}
             </div>
-            {showPopUp ? <Friend user={friendToOpen} /> : null}
+            {showPopUp ? <Friend user={friendToOpen} setShowPopUp={setShowPopUp} /> : null}
         </div>
     );
 }
