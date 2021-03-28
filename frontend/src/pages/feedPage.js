@@ -12,6 +12,11 @@ const FeedPage = (props) => {
   const [newSnippets, setNewSnippets] = useState([]);
   const [snippetMap, setSnippetMap] = useState(null);
   const [currTab, setCurrTab] = useState(0);
+  const [showPopUp, setShowPopUp] = useState(false);
+
+  const closePopup = () => {
+    setShowPopUp(false);
+  }
 
   const renderTags = () => {
     return (
@@ -107,6 +112,7 @@ const FeedPage = (props) => {
   }, []); 
 
   return (
+    <>
     <div className="outermost">
       <div className="navbar-placeholder"></div>
       <div className="feed-page-container">
@@ -119,10 +125,12 @@ const FeedPage = (props) => {
           </div>
         </div>
         <div className="feed-page-right-sidebar">
-          <p className="create-recording-button">Create Recording</p>
+          <p className="create-recording-button" onClick={() => {setShowPopUp(true)}}>Create Recording</p>
         </div>
       </div>
     </div>
+    {showPopUp ? (<Create closePopup={closePopup}/>) : null}
+    </>
   );
 
 }
