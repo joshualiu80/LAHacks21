@@ -35,7 +35,6 @@ const Login = (props) => {
 
     const submitLogin = async (e) => {
         e.preventDefault();
-        console.log(config.AUTH_VERIFY_URL)
         const res = await axios.post(config.AUTH_VERIFY_URL, { username: username, password: password });
         if (res.status === 200) {
             setLoggedIn(true);

@@ -1,7 +1,7 @@
 let config = {};
 
-const DEV = true;
-config.API_URL = (DEV) ? 'jytte.ddns.net:3000' : 'localhost:3000';
+const USE_LOCALHOST = false;
+config.API_URL = (USE_LOCALHOST) ? 'http://jytte.ddns.net:3000' : 'http://localhost:3000';
 
 config.AUDIO_STREAM_URL = `${config.API_URL}/snippets`;
 config.AUDIO_UPLOAD_URL = `${config.API_URL}/upload`;
