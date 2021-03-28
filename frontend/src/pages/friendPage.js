@@ -24,7 +24,7 @@ const FriendPage = (props) => {
     }
     , []); 
 
-    const displayFriends = useMemo(() => exampleFriendsList.map(
+    const displayFriends = useMemo(() => friendsList.map(
         (friend) => (
             <FriendBubble username={friend.username} userId={friend._id} profilePic={exampleIMG} setShowPopUp={setShowPopUp} setFriendToOpen={setFriendToOpen} />
         )
