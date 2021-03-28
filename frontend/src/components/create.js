@@ -5,7 +5,7 @@ import { faPlay, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import config from '../config';
 
-const Create = () => {
+const Create = ({closePopup}) => {
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -55,7 +55,7 @@ const Create = () => {
 
   return (
     <>
-      <div className="overlay" />
+      <div className="overlay" onClick={closePopup} />
       <div className="tabcontent" style={{zIndex: "2", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", borderRadius: "20px"}}>
         <div className="audio-tags">
           {tags.map((tag) => {

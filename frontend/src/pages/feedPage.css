@@ -6,6 +6,7 @@
 .tag-row {
   display: flex;
   flex-direction: row;
+  margin-left: 20px;
 }
 
 .tag-button {
@@ -23,7 +24,6 @@
   background-color: #B95696;
 }
 
-
 .snippet-card {
   display: flex;
   justify-content: space-around;
@@ -34,7 +34,6 @@
   border-radius: 60px ;
   background-color: rgba(255, 255, 255, 0.8);
 }
-
 
 .snippet-image {
   display:inline-block;
@@ -55,6 +54,15 @@
   align-items: center;
 }
 
+.feed-title {
+  margin-left: 30px;
+  color: white;
+}
+
+.no-snippets-message {
+  margin: 50px;
+  color: white;
+}
 
 .feed-page-container {
   display: flex;
@@ -69,6 +77,15 @@
   width: 30vw;
 }
 
+.add-friend-button {
+  position: fixed;
+  bottom: 7vw;
+  right: 7.5vw;
+  background-color:#F47F6B;
+  border-radius: 40px;
+  padding: 15px 38px;
+}
+
 .create-recording-button {
   position: fixed;
   bottom: 2vw;
@@ -78,6 +95,6 @@
   padding: 15px;
 }
 
-.tag-button:hover, .create-recording-button:hover {
+.tag-button:hover, .create-recording-button:hover, .add-friend-button:hover {
   cursor: pointer;
 }
