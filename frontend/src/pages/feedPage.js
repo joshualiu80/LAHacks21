@@ -126,6 +126,7 @@ const FeedPage = (props) => {
           </div>
         </div>
         <div className="feed-page-right-sidebar">
+          <p className="add-friend-button">Add Friend</p>
           <p className="create-recording-button" onClick={() => {setShowPopUp(true)}}>Create Recording</p>
         </div>
       </div>
