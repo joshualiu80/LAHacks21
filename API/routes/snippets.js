@@ -50,18 +50,40 @@ router.get('/users/:userId', (req, res, next) => {
 	
 	const currentDate = new Date();
 	
-	User.findById(req.params.userId).populate(target).exec((err, user) => {
-		if (err) res.status(500).send(err);
-		console.log('user:', user);
-		let outputSnippets = /*user[target]*/ user.snippetsReceived;
+	Snippet.find({ recipient: req.params.userId }, (err, snippets) => {
+		if (err) {
+			console.log('Error:' + err);
+			res.status(500).send(err);
+		}
+		console.log('snippets:', snippets);
+		let outputSnippets = snippets;
 		console.log(outputSnippets);
 		if (target === 'snippetsReceived') {
 			// Filter out future snippets
 			outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
 		}
 
-		res.send(outputSnippets);
+		outputSnippets = outputSnippets.map(snippet => snippet._id);
+		console.log(outputSnippets);
+
+		res.status(200).send(outputSnippets);
 	});
+
+	// User.findById(req.params.userId).populate(target).exec((err, user) => {
+	// 	if (err) {
+	// 		console.log('Error:' + err);
+	// 		res.status(500).send(err);
+	// 	}
+	// 	console.log('user:', user);
+	// 	let outputSnippets = /*user[target]*/ user.snippetsReceived;
+	// 	console.log(outputSnippets);
+	// 	if (target === 'snippetsReceived') {
+	// 		// Filter out future snippets
+	// 		outputSnippets = outputSnippets.filter(snippet => snippet.scheduledDate <= currentDate);
+	// 	}
+
+	// 	res.send(outputSnippets);
+	// });
 });
 
 // Create a new snippet
@@ -81,7 +103,7 @@ router.post('/', (req, res, next) => {
 		recipient: req.body.recipient,
 		fileName: fileName,
 		tag: req.body.tag,
-		creationDate: req.body.creationDate,
+		//creationDate: req.body.creationDate,
 		scheduledDate: req.body.scheduledDate || req.body.creationDate,
 	
 	};
@@ -128,10 +150,15 @@ router.post('/', (req, res, next) => {
 	);
 });
 
-/*
-router.put('/:id', (req, res) => {
 
-	
+router.put('/:id', async (req, res) => {
+	try {
+		await Snippet.updateOne({_id: req.params.id}, { $set: { listened: true } });
+		res.status(200).send(`Snippet with id ${req.params.id} updated successfully!`);
+	} catch (err) {
+		console.log('Error: ' + err);
+		res.status(400).send(err);
+	}
 });
-*/
+
 module.exports = router;

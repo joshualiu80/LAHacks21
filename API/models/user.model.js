@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Snippet = require('./snippet.model');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -8,8 +9,8 @@ const userSchema = new Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   friends: [{ type: mongoose.Schema.Types.ObjectId }],
-  snippetsSent: [{ type: mongoose.Schema.Types.ObjectId, default: [] }],
-  snippetsReceived: [{ type: mongoose.Schema.Types.ObjectId, default: [] }]
+  snippetsSent: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }],
+  snippetsReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Snippet', default: [] }]
 });
 
 const User = mongoose.model('users', userSchema);

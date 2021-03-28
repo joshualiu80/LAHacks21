@@ -21,6 +21,7 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 });
 
+const Snippet = require("./models/snippet.model");
 
 //routes
 const userRouter = require('./routes/users');
