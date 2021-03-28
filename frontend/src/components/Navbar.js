@@ -29,7 +29,7 @@ class Navbar extends React.Component {
 					<p>TalkLuna</p>
 				</a>
 				<ul>
-					<li><a href='/community'>Community</a></li>
+					<li><a href='/feed'>Feed</a></li>
 					<li><a href='/friends'>Friends</a></li>
 					<li><a href='/profile'>
 						<img src={this.state.profileImg} alt='Profile Image' id='profile-image' />
