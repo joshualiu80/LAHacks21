@@ -31,6 +31,7 @@ const Create = ({closePopup}) => {
   const onSave = () => {
     const formData = new FormData();
     formData.append('audio-file', audioBlob);
+    closePopup();
   }
   const deleteSound = () => {
     setAudioUrl(null);
@@ -56,7 +57,7 @@ const Create = ({closePopup}) => {
   return (
     <>
       <div className="overlay" onClick={closePopup} />
-      <div className="tabcontent" style={{zIndex: "2", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", borderRadius: "20px"}}>
+      <div className="tabcontent" style={{zIndex: "2", position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", borderRadius: "20px"}}>
         <div className="audio-tags">
           {tags.map((tag) => {
             return (
